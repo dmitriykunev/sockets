@@ -16,7 +16,12 @@ import {
 import 'rsuite/dist/styles/rsuite.min.css';
 import React, {Component} from 'react';
 import '../index.css';
-// import DataTransaction from './dataTransaction';
+import DataTransaction from './dataTransaction';
+import { connect } from 'react-redux'
+
+const mapStateToProps = state => {
+  return state
+};
 
 class SignIn extends Component {
   constructor(props) {
@@ -46,15 +51,19 @@ class SignIn extends Component {
     return this.props.history.push('/signUp')
   };
 
-  handleSubmit = (event) => {
+  handleSubmit = async (event) => {
     event.preventDefault();
-    console.log(this.state.password)
-    // const user = {
-    //   login: this.state.login,
-    //   password: this.state.password
-    // };
-    // const {data} = await DataTransaction.login(user);
-
+    const user = {
+      login: this.state.login,
+      password: this.state.password
+    };
+    const {data} = await DataTransaction.login(user);
+    this.props.dispatch({
+      type: 'SIGN_IN',
+      data
+    });
+    localStorage.setItem('userName', data.userName);
+    localStorage.setItem('token', data.token);
   };
 
   render() {
@@ -119,4 +128,4 @@ class SignIn extends Component {
   };
 };
 
-export default SignIn
+export default connect(mapStateToProps) (SignIn);
