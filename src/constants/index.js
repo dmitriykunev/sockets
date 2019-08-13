@@ -7,3 +7,7 @@ export const SIGN_UP_FAIL = 'SIGN_UP_FAIL';
 export const MESSAGE_SENT = 'MESSAGE_SENT';
 export const MESSAGE_RECEIVED = 'MESSAGE_RECEIVED';
 export const LOGOUT = 'LOGOUT';
+export const TYPE_IN_LOGIN = 'TYPE_IN_LOGIN';
+export const TYPE_IN_USERNAME = 'TYPE_IN_USERNAME';
+export const TYPE_IN_PASSWORD = 'TYPE_IN_PASSWORD';
+export const TYPE_IN_EMAIL = 'TYPE_IN_EMAIL';

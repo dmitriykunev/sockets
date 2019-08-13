@@ -7,7 +7,7 @@ class DataTransaction {
   login(payload) {
     return axios.post(URL + '/login', payload);
   }
-  register(payload) {
+  signUp(payload) {
     return axios.put(URL + '/register', payload);
   }
   token(payload) {

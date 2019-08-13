@@ -7,6 +7,8 @@ body {
   -moz-osx-font-smoothing: grayscale;
 }
 
+
+
 code {
   font-family: source-code-pro, Menlo, Monaco, Consolas, "Courier New",
     monospace;
@@ -615,6 +617,7 @@ p {
   background-color: rgba(0, 0, 0, 0.16);
 }
 
-.rs-navbar.rs-navbar-inverse {
+div.rs-navbar.rs-navbar-inverse {
   background-color: green;
+  padding-left: 15px;
 }

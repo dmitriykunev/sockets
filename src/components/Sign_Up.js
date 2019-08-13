@@ -2,7 +2,6 @@ import {
   Container,
   Header,
   Content,
-  Footer,
   Navbar,
   FlexboxGrid,
   Panel,
@@ -11,35 +10,99 @@ import {
   ControlLabel,
   ButtonToolbar,
   Button,
-Input
+  Input
 } from 'rsuite';
+import 'rsuite/dist/styles/rsuite.min.css';
 import React, {Component} from 'react';
-// import DataTransaction from './dataTransaction';
+import '../index.css';
+import DataTransaction from './dataTransaction';
+import { connect } from 'react-redux'
+
+const mapStateToProps = state => {
+  return state
+};
 
 class SignUp extends Component {
-  state = {
-    login: '',
-    password: ''
-  };
+  constructor(props) {
+    super(props);
+    this.state = {
+      userName: '',
+      login: '',
+      role: 'user',
+      email: '',
+      password: '',
+      token: Math.random().toString(36).substr(2, 25)
+    };
+  }
+
 
   handleLogin = (event) => {
     this.setState({
-      login: event.target.value
-    })
+      login : event
+    });
+    const payload = event;
+    this.props.dispatch({
+      type: 'TYPE_IN_LOGIN',
+      payload
+    });
+  };
+
+  handleEmail = (event) => {
+    this.setState({
+      email : event
+    });
+    const payload = event;
+    this.props.dispatch({
+      type: 'TYPE_IN_EMAIL',
+      payload
+    });
+  };
+
+  handleUserName = (event) => {
+    this.setState({
+      userName : event
+    });
+    const payload = event;
+    this.props.dispatch({
+      type: 'TYPE_IN_USERNAME',
+      payload
+    });
   };
 
   handlePassword = (event) => {
     this.setState({
-      password: event.target.value
-    })
+      password : event
+    });
+    const payload = event;
+    this.props.dispatch({
+      type: 'TYPE_IN_PASSWORD',
+      payload
+    });
   };
 
-  handleSubmit = async () => {
+  handleRedirect = (event) => {
+    console.log('I work');
+    event.preventDefault();
+    return this.props.history.push('/signIn')
+  };
+
+  handleSubmit = async (event) => {
+    event.preventDefault();
     const user = {
+      userName: this.state.userName,
+      email: this.state.email,
+      token:this.state.token,
+      role: this.state.role,
       login: this.state.login,
       password: this.state.password
     };
-    // const {data} = await DataTransaction.login(user);
+    const {data} = await DataTransaction.signUp(user);
+    this.props.dispatch({
+      type: 'SIGN_UP',
+      data
+    });
+    localStorage.setItem('userName', data.userName);
+    localStorage.setItem('token', data.token);
   };
 
   render() {
@@ -47,29 +110,75 @@ class SignUp extends Component {
       <div className="login-page">
         <Container>
           <Header>
-            <Navbar appearance="inverse">
+            <Navbar appearance="inverse" color="green">
               <Navbar.Header>
-                <a className="navbar-brand logo">Socket Chat</a>
+                <h2><p> Sign Up to the Service </p></h2>
               </Navbar.Header>
             </Navbar>
-          </Header>
+          </Header><br />
           <Content>
             <FlexboxGrid justify="center">
               <FlexboxGrid.Item colspan={12}>
-                <Panel header={<h3>Login</h3>} bordered>
+                <Panel header={<h3>SignUp</h3>} bordered>
                   <Form fluid onSubmit={this.handleSubmit}>
                     <FormGroup>
-                      <ControlLabel>Username or email address</ControlLabel>
-                      <Input name="name" onChange={this.handleLogin} />
+                      <ControlLabel>Username</ControlLabel>
+                      <Input name="name"
+                             type="text"
+                             size="lg"
+                             value={this.state.userName}
+                             className="rs-input"
+                             placeholder="Your User Name"
+                             autoComplete="username"
+                             onChange={this.handleUserName}
+                      />
+                    </FormGroup>
+                    <FormGroup>
+                      <ControlLabel>Login</ControlLabel>
+                      <Input name="name"
+                             type="text"
+                             size="lg"
+                             value={this.state.login}
+                             className="rs-input"
+                             placeholder="Your Login"
+                             autoComplete="login"
+                             onChange={this.handleLogin}
+                      />
+                    </FormGroup>
+                    <FormGroup>
+                      <ControlLabel>Email</ControlLabel>
+                      <Input name="E-mail"
+                             type="email"
+                             size="lg"
+                             value={this.state.email}
+                             autoComplete="current-email"
+                             className="rs-input"
+                             placeholder="Your Email"
+                             onChange={this.handleEmail}
+                      />
                     </FormGroup>
                     <FormGroup>
                       <ControlLabel>Password</ControlLabel>
-                      <Input name="password" type="password" onChange={this.handlePassword} />
+                      <Input name="password"
+                             type="password"
+                             size="lg"
+                             value={this.state.password}
+                             autoComplete="current-password"
+                             className="rs-input"
+                             placeholder="Your Password"
+                             onChange={this.handlePassword}
+                      />
                     </FormGroup>
                     <FormGroup>
                       <ButtonToolbar>
-                        <Button appearance="primary">Sign in</Button>
-                        <Button appearance="link">Forgot password?</Button>
+                        <Button appearance="primary" type="submit" color="green">Sign Up</Button>
+                        <Button appearance="ghost"
+                                type="button"
+                                onClick={this.handleRedirect}
+                                href={'/signIn'}
+                                color="green"
+                        >
+                          I'm already registered</Button>
                       </ButtonToolbar>
                     </FormGroup>
                   </Form>
@@ -77,11 +186,10 @@ class SignUp extends Component {
               </FlexboxGrid.Item>
             </FlexboxGrid>
           </Content>
-          <Footer>Powered by @</Footer>
         </Container>
       </div>
     )
   };
 };
 
-export default SignUp
+export default connect(mapStateToProps) (SignUp);

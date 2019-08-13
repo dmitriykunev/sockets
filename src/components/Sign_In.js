@@ -2,7 +2,6 @@ import {
   Container,
   Header,
   Content,
-  Footer,
   Navbar,
   FlexboxGrid,
   Panel,
@@ -36,17 +35,26 @@ class SignIn extends Component {
   handleLogin = (event) => {
     this.setState({
       login : event
-    })
+    });
+    const payload = event;
+    this.props.dispatch({
+      type: 'TYPE_IN_LOGIN',
+      payload
+    });
   };
 
   handlePassword = (event) => {
     this.setState({
       password : event
-    })
+    });
+    const payload = event;
+    this.props.dispatch({
+      type: 'TYPE_IN_PASSWORD',
+      payload
+    });
   };
 
   handleRedirect = (event) => {
-    console.log('I work');
     event.preventDefault();
     return this.props.history.push('/signUp')
   };
@@ -86,6 +94,7 @@ class SignIn extends Component {
                       <ControlLabel>Username or email address</ControlLabel>
                       <Input name="name"
                              type="text"
+                             size="lg"
                              value={this.state.login}
                              className="rs-input"
                              placeholder="Your Login"
@@ -97,6 +106,7 @@ class SignIn extends Component {
                       <ControlLabel>Password</ControlLabel>
                       <Input name="password"
                              type="password"
+                             size="lg"
                              value={this.state.password}
                              autoComplete="current-password"
                              className="rs-input"
@@ -121,7 +131,6 @@ class SignIn extends Component {
               </FlexboxGrid.Item>
             </FlexboxGrid>
           </Content>
-          <Footer>Footer</Footer>
         </Container>
       </div>
     )

@@ -7,6 +7,10 @@ import {
   SIGN_UP_FAIL,
   MESSAGE_SENT,
   MESSAGE_RECEIVED,
+  TYPE_IN_USERNAME,
+  TYPE_IN_PASSWORD,
+  TYPE_IN_LOGIN,
+  TYPE_IN_EMAIL,
   LOGOUT
 } from '../constants/index'
 
@@ -40,6 +44,22 @@ export function messageSent(payload) {
 
 export function messageReceived(payload) {
   return {type: MESSAGE_RECEIVED, payload}
+};
+
+export function typeInPassword(payload) {
+  return {type: TYPE_IN_PASSWORD, payload}
+};
+
+export function typeInLogin(payload) {
+  return {type: TYPE_IN_LOGIN, payload}
+};
+
+export function typeInEmail(payload) {
+  return {type: TYPE_IN_EMAIL, payload}
+};
+
+export function typeInUserName(payload) {
+  return {type: TYPE_IN_USERNAME, payload}
 };
 
 export function logout() {

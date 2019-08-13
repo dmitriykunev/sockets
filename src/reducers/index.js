@@ -7,7 +7,11 @@ import {
   SIGN_UP_FAIL,
   MESSAGE_SENT,
   MESSAGE_RECEIVED,
-  LOGOUT
+  LOGOUT,
+  TYPE_IN_EMAIL,
+  TYPE_IN_LOGIN,
+  TYPE_IN_PASSWORD,
+  TYPE_IN_USERNAME
 } from '../constants/index';
 
 const initialState = {
@@ -15,7 +19,9 @@ const initialState = {
   email: '',
   password: '',
   token: '',
-  info: '',
+  role: 'user',
+  ban: false,
+  typing: false,
   error: ''
 };
 
@@ -37,6 +43,14 @@ function reducer(state = initialState, action) {
       return {...state};
     case MESSAGE_RECEIVED:
       return {...state};
+      case TYPE_IN_USERNAME:
+      return {...state, userName: action.payload};
+    case TYPE_IN_LOGIN:
+      return {...state, login: action.payload};
+    case TYPE_IN_EMAIL:
+      return {...state, email: action.payload};
+    case TYPE_IN_PASSWORD:
+      return {...state, password: action.payload};
     case LOGOUT:
       return initialState;
     default:
