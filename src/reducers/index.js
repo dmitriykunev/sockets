@@ -30,9 +30,17 @@ function reducer(state = initialState, action) {
     case SIGN_IN:
       return {...state};
     case SIGN_IN_SUCCESS:
-      return {...state};
+      return {
+        ...state, userName: action.payload.data.userName,
+        email: action.payload.data.email,
+        password: action.payload.data.password,
+        token: action.payload.data.token,
+        role: action.payload.data.role,
+        ban: action.payload.data.ban,
+        typing: action.payload.data.typing
+      };
     case SIGN_IN_FAIL:
-      return {...state};
+      return {...state, error: 'Something went wrong, try again later'};
     case SIGN_UP:
       return {...state};
     case SIGN_UP_SUCCESS:
@@ -43,10 +51,10 @@ function reducer(state = initialState, action) {
       return {...state};
     case MESSAGE_RECEIVED:
       return {...state};
-      case TYPE_IN_USERNAME:
+    case TYPE_IN_USERNAME:
       return {...state, userName: action.payload};
     case TYPE_IN_LOGIN:
-      return {...state, login: action.payload};
+      return {...state, userName: action.payload};
     case TYPE_IN_EMAIL:
       return {...state, email: action.payload};
     case TYPE_IN_PASSWORD:

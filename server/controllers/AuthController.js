@@ -1,25 +1,25 @@
 
 class AuthController {
 
-    async userLookUp (name, passwd) {
+    async userLookUp (name, password) {
         console.log('Searching a user');
-        const {NewUserBase: socketmodel} = require('../models');
+        const {socketmodel} = require('../models');
         return socketmodel.findAll({
             raw: true,
             where: {
                 userName: name,
-                password: passwd
+                password: password
             }
         });
     };
 
     async login(req, res){
         if (req.body) {
-            const user = await this.userLookUp(req.body.userName, req.body.password);
+            const user = await this.userLookUp(req.body.login, req.body.password);
             console.log(user);
             if (user) {
-                const [data] = user;
-                res.send(data);
+                const [payload] = user;
+                res.send(payload);
                 console.log('Query finished')
             }
         } else {

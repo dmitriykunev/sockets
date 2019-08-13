@@ -65,13 +65,24 @@ class SignIn extends Component {
       login: this.state.login,
       password: this.state.password
     };
-    const {data} = await DataTransaction.login(user);
+    const payload = await DataTransaction.login(user);
     this.props.dispatch({
       type: 'SIGN_IN',
-      data
+      payload
     });
-    localStorage.setItem('userName', data.userName);
-    localStorage.setItem('token', data.token);
+    localStorage.setItem('userName', payload.userName);
+    localStorage.setItem('token', payload.token);
+    if(payload.data.token) {
+      this.props.dispatch({
+        type: 'SIGN_IN_SUCCESS',
+        payload
+      });
+      return this.props.history.push('/chat')
+    } else {
+        this.props.dispatch({
+          type: 'SIGN_IN_FAIL'
+        })
+      }
   };
 
   render() {
