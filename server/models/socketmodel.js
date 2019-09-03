@@ -1,6 +1,6 @@
-'use strict';
 module.exports = (sequelize, DataTypes) => {
   const socketmodel = sequelize.define('socketmodel', {
+    login: DataTypes.STRING,
     token: DataTypes.STRING,
     userName: DataTypes.STRING,
     email: DataTypes.STRING,

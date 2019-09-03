@@ -11,3 +11,6 @@ export const TYPE_IN_LOGIN = 'TYPE_IN_LOGIN';
 export const TYPE_IN_USERNAME = 'TYPE_IN_USERNAME';
 export const TYPE_IN_PASSWORD = 'TYPE_IN_PASSWORD';
 export const TYPE_IN_EMAIL = 'TYPE_IN_EMAIL';
+export const SIDEBAR_TOGGLE = 'SIDEBAR_TOGGLE';
+export const TOKEN_UPDATED = 'TOKEN_UPDATED';
+export const TOKEN_ABSENT = 'TOKEN_ABSENT';

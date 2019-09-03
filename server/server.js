@@ -22,7 +22,7 @@ function getUserByToken(token){
   });
 }
 
-function userRegister(name, passwd, token, email, role) {
+function userRegister(name, passwd, token, email, role, login, ban) {
   console.log('Registration started');
   const {socketmodel} = require('./models');
   return socketmodel.create({
@@ -31,7 +31,9 @@ function userRegister(name, passwd, token, email, role) {
     password: passwd,
     token: token,
     email: email,
-    role: role
+    role: role,
+    ban: ban,
+    login: login
   })
 }
 
@@ -69,11 +71,11 @@ app.put('/modify', async function (req, res) {
   res.statusCode = 200
 });
 app.put('/register', async function (req, res) {
-  const {userName, password, token, email, role} = req.body;
+  const {userName, password, token, email, role, login, ban} = req.body;
   console.log(req.body);
   if (req.body) {
     try {
-      const data = await userRegister(userName, password, token, email, role);
+      const data = await userRegister(userName, password, token, email, role, login, ban);
       console.log(data);
       if (data) {
         console.log(data);

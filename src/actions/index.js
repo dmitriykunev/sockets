@@ -11,7 +11,9 @@ import {
   TYPE_IN_PASSWORD,
   TYPE_IN_LOGIN,
   TYPE_IN_EMAIL,
-  LOGOUT
+  LOGOUT, 
+  SIDEBAR_TOGGLE,
+  TOKEN_UPDATED
 } from '../constants/index'
 
 export function signIn(payload) {
@@ -64,4 +66,12 @@ export function typeInUserName(payload) {
 
 export function logout() {
   return {type: LOGOUT}
+};
+
+export function sideBarToggle(payload) {
+  return {type: SIDEBAR_TOGGLE, payload}
+};
+
+export function tokenUpdated(payload) {
+  return {type: TOKEN_UPDATED, payload}
 };

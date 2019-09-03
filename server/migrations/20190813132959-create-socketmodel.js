@@ -1,4 +1,3 @@
-'use strict';
 module.exports = {
   up: (queryInterface, Sequelize) => {
     return queryInterface.createTable('socketmodels', {
@@ -14,6 +13,9 @@ module.exports = {
       userName: {
         type: Sequelize.STRING
       },
+      login: {
+        type: Sequelize.STRING
+      },
       email: {
         type: Sequelize.STRING
       },
@@ -24,9 +26,13 @@ module.exports = {
         type: Sequelize.STRING
       },
       ban: {
+        allowNull: false,
+        defaultValue: false,
         type: Sequelize.BOOLEAN
       },
       typing: {
+        allowNull: false,
+        defaultValue: false,
         type: Sequelize.BOOLEAN
       },
       error: {

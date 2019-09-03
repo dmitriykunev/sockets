@@ -27,6 +27,7 @@ class SignUp extends Component {
     super(props);
     this.state = {
       userName: '',
+      ban: 'false',
       login: '',
       role: 'user',
       email: '',
@@ -97,12 +98,22 @@ class SignUp extends Component {
       password: this.state.password
     };
     const {data} = await DataTransaction.signUp(user);
+    console.log(data);
+    if(data) {
     this.props.dispatch({
-      type: 'SIGN_UP',
+      type: 'SIGN_UP_SUCCESS',
       data
     });
     localStorage.setItem('userName', data.userName);
     localStorage.setItem('token', data.token);
+    localStorage.setItem('login', data.login);
+    return this.props.history.push('/chat')
+  } else {
+    this.props.dispatch({
+      type: 'SIGN_UP_FAIL',
+      data
+    });
+  }
   };
 
   render() {

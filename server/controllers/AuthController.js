@@ -1,13 +1,13 @@
 
 class AuthController {
 
-    async userLookUp (name, password) {
+    async userLookUp (login, password) {
         console.log('Searching a user');
         const {socketmodel} = require('../models');
         return socketmodel.findAll({
             raw: true,
             where: {
-                userName: name,
+                login: login,
                 password: password
             }
         });
