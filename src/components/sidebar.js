@@ -23,7 +23,7 @@ class Sidebar extends Component {
 
         handleToggle = () => {
             this.setState({
-                sidebar: !this.state.sidebar
+                sidebar: this.props.sidebar
               })
         };
 

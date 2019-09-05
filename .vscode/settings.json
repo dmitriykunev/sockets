@@ -1,0 +1,5 @@
+{
+    "git.autofetch": true,
+    "eslint.alwaysShowStatus": true,
+    "material-icon-theme.activeIconPack": "react_redux"
+}
