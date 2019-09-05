@@ -21,7 +21,7 @@ class MainChatComponent extends Component {
     constructor(props) {
         super(props);
         this.state = {
-          sidebar: false,
+          sidebar: this.props.sidebar,
           message: '',
           messages: []
         };
